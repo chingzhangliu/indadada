@@ -13,7 +13,7 @@ from linebot.exceptions import(
 )
 from linebot.models import*
 
-app=Flask(_name_)
+app=Flask(__name__)
 
 ACCESS_TOKEN=os.environ['ACCESS_TOKEN']
 SECRET=os.environ['CHANNEL_SECRET']
@@ -49,7 +49,7 @@ def handle_message(event):
     _message=TextSendMessage(text='1')
     line_bot_api.reply_message(event.reply_token, _message)
 import os
-if _name_=="_main_":
+if __name__=="__main__":
   
   port=int(os.environ.get('port',5000))
   app.run(host='0.0.0.0', port=port)
