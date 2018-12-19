@@ -16,7 +16,7 @@ from linebot.models import*
 app=Flask(__name__)
 
 ACCESS_TOKEN=os.environ['ACCESS_TOKEN']
-SECRET=os.environ['CHANNEL_SECRET']
+SECRET= os.environ['CHANNEL_SECRET']
 
 line_bot_api=LineBotApi(ACCESS_TOKEN)
 handler=WebhookHandler(SECRET)
