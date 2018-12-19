@@ -21,7 +21,7 @@ SECRET= os.environ['CHANNEL_SECRET']
 line_bot_api=LineBotApi(ACCESS_TOKEN)
 handler=WebhookHandler(SECRET)
 
-@app.rout("/")
+@app.route("/")
 def hello_world():
   return "hello world!"
   
