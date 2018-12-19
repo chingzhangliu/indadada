@@ -46,9 +46,10 @@ def handle_message(event):
   _low_token=_token[0].lower()
   
   if '!h' in _token[0]:
-    _message=TextSendMessage(text='')
+    _message=TextSendMessage(text='1')
     line_bot_api.reply_message(event.reply_token, _message)
-  else _message=TextSendMessage(text='')
+  else :
+    _message=TextSendMessage(text='2')
     line_bot_api.reply_message(event.reply_token, _message)
 import os
 if _name_=="_main_":
