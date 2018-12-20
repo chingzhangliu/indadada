@@ -41,14 +41,8 @@ def callback():
 def handle_message(event):
   msg=event.message.text
   _low_msg=msg.lower()
-  locmsg=event.message.location
   _token=msg.strip().split(" ")
   _low_token=_token[0].lower()
-  message123 = {
-      type: 'text',
-      text: reply_text
-    } 
-  line_bot_api.reply_message(event.reply_token, message123)
   if '!h' in _token[0]:
     _message=TextSendMessage(text="1")
     line_bot_api.reply_message(event.reply_token, _message)
