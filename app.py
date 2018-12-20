@@ -42,11 +42,17 @@ def handle_message(event):
   msg=event.message.text
   _low_msg=msg.lower()
   locmsg=event.message.location
-  
+  message = {
+  "type": "location",
+  "title": "第一行文字",
+  "address": "第二行文字",
+  "latitude": 35.65910807942215,
+  "longitude": 139.70372892916203
+}
   _token=msg.strip().split(" ")
   _low_token=_token[0].lower()
   _message=TextSendMessage(location=locmsg)
-  line_bot_api.reply_message(event.reply_token, _message)
+  line_bot_api.reply_message(event.reply_token, message)
   if '!h' in _token[0]:
     _message=TextSendMessage(text="1")
     line_bot_api.reply_message(event.reply_token, _message)
