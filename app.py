@@ -29,18 +29,6 @@ def hello_world():
 @app.route("/callback", methods=['POST'])
 def callback():
   
-  rich_menu_to_create = RichMenu(
-      size=RichMenuSize(width=2500, height=843),
-      selected=False,
-      name="Nice richmenu",
-      chat_bar_text="Tap here",
-      areas=[RichMenuArea(
-          bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
-          action=URIAction(label='Go to line.me', uri='https://line.me'))]
-  )
-  rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-  print(rich_menu_id)
-  
   signature=request.headers['X-Line-Signature']
   body=request.get_data(as_text=True)
   app.logger.info("Request body: "+body)
@@ -59,6 +47,13 @@ def handle_message(event):
   if '!h' in _token[0]:
     _message=TextSendMessage(text="1")
     line_bot_api.reply_message(event.reply_token, _message)
+  else:
+    search_result = get_search_engine(_token[0], 3)
+        reply =TextSendMessage(text="您所搜尋的結果為：\n")
+        line_bot_api.reply_message(event.reply_token,reply)
+        for r in search_result:
+            result_message = r[0] + "("+r[1]+")"
+            line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
 import os
 if __name__=="__main__":
   
