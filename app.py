@@ -52,6 +52,7 @@ def handle_message(event):
   else:
     
     addr=event.reply_token
+    profile = line_bot_api.get_profile(addr)
     reply =TextSendMessage(text='1'+str(addr))
     line_bot_api.reply_message(event.reply_token,reply)
     rank=prk(int(_token[0]))
