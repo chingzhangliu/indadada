@@ -47,6 +47,8 @@ def handle_message(event):
   if '!h' in _token[0]:
     _message=TextSendMessage(text="給個數字")
     line_bot_api.reply_message(event.reply_token, _message)
+    reply =TextSendMessage(text="您所搜尋的結果為：\n")
+    line_bot_api.reply_message(event.reply_token,reply)
   else:
     reply =TextSendMessage(text="您所搜尋的結果為：\n")
     line_bot_api.reply_message(event.reply_token,reply)
