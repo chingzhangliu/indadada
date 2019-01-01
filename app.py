@@ -53,7 +53,7 @@ def handle_message(event):
     
     addr=event.reply_token
     
-    reply =TextSendMessage(text='456')
+    reply =TextSendMessage(text='111')
     line_bot_api.reply_message(event.reply_token,reply)
     
     rank=prk(int(_token[0]))
