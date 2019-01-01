@@ -59,19 +59,21 @@ def handle_message(event):
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
     
-def prk(num):
+def findshop(num):
   result = []
-  target = 'https://www.pixiv.net/ranking.php?mode=female'
-  r = requests.get(target)
-  soup=BeautifulSoup(r.text,'html.parser')
-  res=soup.find('div',{'class':'ranking-items adjust'})
-  res_rk=res.find_all('section',{'class':"ranking-item"})
-  for idx, rk in enumerate(res_rk):
-    if idx < num:
-      tag=rk.find('h2').find('a')
-      title=tag.get_text()
-      href='https://www.pixiv.net/'+tag['href']
-      result.append((title,href))
+  target = 'https://www.google.com.tw/maps/search/%E9%A3%B2%E6%96%99%E5%BA%97/@24.180978,120.5990928,15z/data=!4m3!2m2!5m1!10e2'
+  driver = webdriver.PhantomJS(executable_path= '/phantomjs-2.1.1-windows/bin/phantomjs')
+  driver.get(target)
+  pageSource = driver.page_source
+  soup=BeautifulSoup(pageSource,'lxml')
+  res=soup.find('jsl').find('div',{'id':'content-container'}).find('div',{'id':"pane"}).find('div',{'role':'listbox'}).find('div',{'role':'listbox'})
+  res_all=res.find_all('div',{'class':'section-result'})
+  for idx, ls in enumerate(res_all):
+    name=ls.find('h3').get_text()
+    rate=ls.find('span',{'class':'section-result-rating'}).get_text()
+    loc=ls.find('span',{'class':'section-result-location'}).get_text()
+    result.append((name,rate,loc))
+    
   return result
   
 import os
