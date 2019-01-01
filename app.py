@@ -63,17 +63,18 @@ def handle_message(event):
 def findshop(num):
   result = []
   target = 'https://www.google.com.tw/maps/search/%E9%A3%B2%E6%96%99%E5%BA%97/@24.180978,120.5990928,15z/data=!4m3!2m2!5m1!10e2'
-  driver = webdriver.PhantomJS(executable_path= '/phantomjs-2.1.1-windows/bin/phantomjs')
+  driver = webdriver.PhantomJS(executable_path= 'https://github.com/chingzhangliu/phantomjs.git')
   driver.get(target)
   pageSource = driver.page_source
   soup=BeautifulSoup(pageSource,'lxml')
   res=soup.find('jsl').find('div',{'id':'content-container'}).find('div',{'id':"pane"}).find('div',{'role':'listbox'}).find('div',{'role':'listbox'})
   res_all=res.find_all('div',{'class':'section-result'})
   for idx, ls in enumerate(res_all):
-    name=ls.find('h3').get_text()
-    rate=ls.find('span',{'class':'section-result-rating'}).get_text()
-    loc=ls.find('span',{'class':'section-result-location'}).get_text()
-    result.append((name,rate,loc))
+    if idx < result_num:
+      name=ls.find('h3').get_text()
+      rate=ls.find('span',{'class':'section-result-rating'}).get_text()
+      loc=ls.find('span',{'class':'section-result-location'}).get_text()
+      result.append((name,rate,loc))
     
   return result
   
