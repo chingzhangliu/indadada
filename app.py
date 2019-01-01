@@ -50,12 +50,12 @@ def handle_message(event):
   else:
     reply =TextSendMessage(text="您所搜尋的結果為：\n")
     line_bot_api.reply_message(event.reply_token,reply)
-    rank=prk()
+    rank=prk(_token[0])
     for r in rank:
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
     
-def prk():
+def prk(num):
   result = []
   target = 'https://www.pixiv.net/ranking.php?mode=female'
   r = requests.get(target)
@@ -63,10 +63,10 @@ def prk():
   res=soup.find('div',{'class':'ranking-items adjust'})
   res_rk=res.find_all('section',{'class':"ranking-item"})
   for idx, rk in enumerate(res_rk):
-    if idx < 2:
+    if idx < num:
       tag=rk.find('h2').find('a')
       title=tag.get_text()
-      href=tag['href']
+      href='https://www.pixiv.net/'+tag['href']
       result.append((title,href))
   return result
   
