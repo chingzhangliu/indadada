@@ -52,10 +52,11 @@ def handle_message(event):
   else:
     
     addr=event.reply_token
+    
+    reply =TextSendMessage(text='456')
+    line_bot_api.reply_message(event.reply_token,reply)
     profile = line_bot_api.get_profile(addr)
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text=profile.display_name))
-    reply =TextSendMessage(text='1'+str(addr))
-    line_bot_api.reply_message(event.reply_token,reply)
     rank=prk(int(_token[0]))
     for r in rank:
       result_message = r[0] + "("+r[1]+")"
