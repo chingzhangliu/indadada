@@ -12,6 +12,7 @@ from linebot.exceptions import(
   InvalidSignatureError
 )
 from linebot.models import *
+from selenium import webdriver
 
 app=Flask(__name__)
 
@@ -54,7 +55,7 @@ def handle_message(event):
     reply =TextSendMessage(text=event.source.user_id)
     line_bot_api.reply_message(event.reply_token,reply)
     
-    shop=findshop(int(_token[0]))
+    shop = findshop(int(_token[0]))
     for r in shop:
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
@@ -62,7 +63,7 @@ def handle_message(event):
 def findshop(num):
   result = []
   target = 'https://www.google.com.tw/maps/search/%E9%A3%B2%E6%96%99%E5%BA%97/@24.180978,120.5990928,15z/data=!4m3!2m2!5m1!10e2'
-  driver = webdriver.PhantomJS(executable_path= '/phantomjs-2.1.1-windows/bin/phantomjs')
+  driver = webdriver.PhantomJS(executable_path= '\phantomjs-2.1.1-windows\bin\phantomjs')
   driver.get(target)
   pageSource = driver.page_source
   soup=BeautifulSoup(pageSource,'lxml')
