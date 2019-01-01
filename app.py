@@ -61,7 +61,7 @@ def handle_message(event):
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
     profile = line_bot_api.get_profile(addr)
-    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=profile.display_name))
+    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='123'))
     
 def prk(num):
   result = []
