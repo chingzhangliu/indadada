@@ -45,12 +45,12 @@ def handle_message(event):
   _token = msg.strip().split(" ")
   _low_token = _token[0].lower()
   if '!h' in _token[0]:
-    _message=TextSendMessage(text="1")
+    _message=TextSendMessage(text="給個數字")
     line_bot_api.reply_message(event.reply_token, _message)
   else:
     reply =TextSendMessage(text="您所搜尋的結果為：\n")
     line_bot_api.reply_message(event.reply_token,reply)
-    rank=prk(_token[0])
+    rank=prk(int(_token[0]))
     for r in rank:
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
