@@ -52,11 +52,11 @@ def handle_message(event):
   else:
     addr=event.reply_token
     reply =TextSendMessage(text="您所搜尋的結果為：\n")
-    line_bot_api.reply_message(event.reply_token,reply)
+    line_bot_api.reply_message(addr,reply)
     rank=prk(int(_token[0]))
     for r in rank:
       result_message = r[0] + "("+r[1]+")"
-      line_bot_api.push_message(addr, TextSendMessage(text=result_message))
+      line_bot_api.reply_message(addr, TextSendMessage(text=result_message))
     
 def prk(num):
   result = []
