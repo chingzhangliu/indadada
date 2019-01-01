@@ -50,8 +50,10 @@ def handle_message(event):
     reply =TextSendMessage(text="您所搜尋的結果為：\n")
     line_bot_api.reply_message(event.reply_token,reply)
   else:
+    
     addr=event.reply_token
-    reply =TextSendMessage(text="您所搜尋的結果為：\n")
+    profile = line_bot_api.get_profile(addr)
+    reply =TextSendMessage(text=addr)
     line_bot_api.reply_message(addr,reply)
     rank=prk(int(_token[0]))
     for r in rank:
