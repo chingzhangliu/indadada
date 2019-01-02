@@ -72,7 +72,9 @@ def handle_message(event):
 def findshop(num):
   result = []
   target = 'https://www.google.com.tw/maps/search/%E9%A3%B2%E6%96%99%E5%BA%97/@24.180978,120.5990928,15z/data=!4m3!2m2!5m1!10e2'
-  driver = webdriver.PhantomJS(executable_path= '/phantomjs-2.1.1-windows/bin/phantomjs.exe')
+  PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+  CHROMEDRIVER = os.path.join(PROJECT_DIR, 'chromedriver')
+  driver = webdriver.PhantomJS(executable_path= '/home/phantomjs-2.1.1-windows/bin/phantomjs.exe')
   driver.get(target)
   pageSource = driver.page_source
   soup=BeautifulSoup(pageSource,'lxml')
