@@ -46,7 +46,7 @@ def handle_message(event):
   _token = msg.strip().split(" ")
   _low_token = _token[0].lower()
   if '!h' in _token[0]:
-    _message=TextSendMessage(text="給個數字?")
+    _message=TextSendMessage(text="我要喝飲料")
     line_bot_api.reply_message(event.reply_token, _message)
   elif '茶湯會' in _token[0]:
     img=ImageSendMessage(
