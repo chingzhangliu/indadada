@@ -50,7 +50,7 @@ def handle_message(event):
     line_bot_api.reply_message(event.reply_token, _message)
   elif 'send' in _token(0):
     idtxt=event.source.user_id
-    lin_bot_api.push_message('U37a3bf674521ba20444e4beb1ded3f27',TextSendMessage(text=idtxt))
+    line_bot_api.push_message('U37a3bf674521ba20444e4beb1ded3f27',TextSendMessage(text=idtxt))
   elif '茶湯會' in _token[0]:
     img=ImageSendMessage(
     original_content_url='https://twcoupon.com/images/menu/p_teapatea_2017_5_n.jpg',
