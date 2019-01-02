@@ -57,7 +57,7 @@ def handle_message(event):
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=121'))
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=106'))
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=101'))
-  else:
+  elif 'qqwe'in _token[0]:
     
     addr=event.reply_token
     
@@ -68,6 +68,25 @@ def handle_message(event):
     for r in shop:
       result_message = r[0] + "("+r[1]+")"
       line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
+  else:
+    survey=TemplateSendMessage(
+      alt_text='附近的飲料店',
+      template=ConfirmTemplate(
+        text='附近的飲料店',
+        actions=[
+          PostbackTemplateAction(
+            label='茶湯會',
+            text='茶湯會',
+            data='茶湯會'
+          ),
+          MessageTemplateAction(
+            label='茶湯會',
+            text='茶湯會'
+          )
+        ]
+      )
+    )
+    line_bot_api.push_message(event.source.user_id, survey)
     
 def findshop(num):
   result = []
