@@ -48,6 +48,15 @@ def handle_message(event):
   if '!h' in _token[0]:
     _message=TextSendMessage(text="給個數字?")
     line_bot_api.reply_message(event.reply_token, _message)
+  elif '茶湯會' in _token[0]:
+    img=ImageSendMessage(
+    original_content_url='https://twcoupon.com/images/menu/p_teapatea_2017_5_n.jpg',
+    preview_image_url='https://catscornervet.com/wp-content/uploads/2016/04/kitty-1.png'
+    )
+    line_bot_api.push_message(event.source.user_id, img)
+    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=121'))
+    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=106'))
+    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=101'))
   else:
     
     addr=event.reply_token
