@@ -58,23 +58,16 @@ def handle_message(event):
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=106'))
     line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=101'))
   else:
-    img=ImageSendMessage(
-    original_content_url='https://twcoupon.com/images/menu/p_teapatea_2017_5_n.jpg',
-    preview_image_url='https://twcoupon.com/images/menu/p_teapatea_2017_5_n.jpg'
-    )
-    line_bot_api.push_message(event.source.user_id, img)
-    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=121'))
-    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=106'))
-    line_bot_api.push_message(event.source.user_id, TextSendMessage(text='https://tw.tp-tea.com/news/ins.php?index_id=101'))
-  #  addr=event.reply_token
     
-  #  reply =TextSendMessage(text=event.source.user_id)
-  #  line_bot_api.reply_message(event.reply_token,reply)
+    addr=event.reply_token
     
-  #  shop  findshop(int(_token[0]))
-  #  for r in shop:
-  #    result_message = r[0] + "("+r[1]+")"
-  #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
+    reply =TextSendMessage(text=event.source.user_id)
+    line_bot_api.reply_message(event.reply_token,reply)
+    
+    shop  findshop(int(_token[0]))
+    for r in shop:
+      result_message = r[0] + "("+r[1]+")"
+      line_bot_api.push_message(event.source.user_id, TextSendMessage(text=result_message))
     
 def findshop(num):
   result = []
@@ -86,7 +79,7 @@ def findshop(num):
   res=soup.find('jsl').find('div',{'id':'content-container'}).find('div',{'id':"pane"}).find('div',{'role':'listbox'}).find('div',{'role':'listbox'})
   res_all=res.find_all('div',{'class':'section-result'})
   for idx, ls in enumerate(res_all):
-    if idx < result_num:
+    if idx < num:
       name=ls.find('h3').get_text()
       rate=ls.find('span',{'class':'section-result-rating'}).get_text()
       loc=ls.find('span',{'class':'section-result-location'}).get_text()
